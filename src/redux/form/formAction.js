@@ -19,18 +19,17 @@ const get_error = (error) => {
 };
 
 export const fetchAPI = (location) => {
-  return  (dispatch) => {
+  return (dispatch) => {
     dispatch(get_data);
      axios
       .get(
         `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=960e55c747dcf2174b74a8b4ac1d17b1`
       )
       .then((res) => {
-        const data = res.data;
-         dispatch(get_success(data));
+         dispatch(get_success(res.data));
       })
       .catch((err) => {
-        const errMSG = err.message;
+        const errMSG = err.message || "There is an error on the server side";
          dispatch(get_error(errMSG));
       });
   };

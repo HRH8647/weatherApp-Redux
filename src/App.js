@@ -10,7 +10,7 @@ const DIV_CONTAINER = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 70vh;
+  height: 85vh;
 `;
 //end-styled-components
 

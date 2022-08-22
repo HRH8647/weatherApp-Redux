@@ -1,25 +1,23 @@
 const initialState = {
-    data: [],
-    error: "",
+    data: null,
+    error: null,
     loading: false
 }
 const formReducer = (state= initialState, action) => {
         switch(action.type) {
             case "GET_DATA": {
                 return{
-                    ...state,
-                    loading: true
+                    ...state
                 }
             }
             case "GET_SUCCCESS": {
                 return{
-                    loading: false, 
+                    ...state,
                     data: action.payload        
                 }
             }
             case "GET_ERROR": {
                 return{
-                    loading: false,
                     data: [],
                     error: action.payload
                 }
