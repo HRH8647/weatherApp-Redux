@@ -7,13 +7,12 @@ import Swal from "sweetalert2";
 import styled from "styled-components";
 //function Handler
 import { convertTemp } from "../helper/handler";
+//spinner && search
+const spinner = <i className="fas fa-spinner fa-spin"></i>;
+const search = <i className="fas fa-search"></i>;
+const cloud_sun = <i className="fas fa-cloud-sun"></i>;
+const circle = <i className="far fa-circle" style={{backgroundColor: "#fff", borderRadius: "50%", fontSize: "10px"}}></i>;
 
-const DivContainer = styled.div`
-  :hover {
-    H3 {
-    }
-  }
-`;
 const H3 = styled.h3`
   text-align: center;
   text-shadow: 0 0 15px #3f4e4f;
@@ -53,6 +52,8 @@ const ButtonForm = styled.button`
   color: #fff;
   cursor: pointer;
   margin-bottom: 10px;
+  outline: 2px solid #3ab0ff;
+  outline-offset: 2px;
 `;
 const UlList = styled.ul`
   border-bottom: 3px solid #000;
@@ -98,12 +99,12 @@ const Main = () => {
     inpText && setIsChange(!isChange);
     setInterval(() => {
       setIsChange(isChange);
-    }, 500);
+    }, 1500);
   };
 
   return (
-    <DivContainer>
-      <H3>Weather-App</H3>
+    <div>
+      <H3>{cloud_sun} Weather App</H3>
       <Form onSubmit={submitHandler}>
         <InputForm
           type="text"
@@ -112,7 +113,7 @@ const Main = () => {
           onChange={(e) => setInpText(e.target.value)}
         />
         <br />
-        <ButtonForm>{isChange ? "Loading ..." : "Search"}</ButtonForm>
+        <ButtonForm>{isChange ? spinner : search}</ButtonForm>
       </Form>
       <div>
         {error ? (
@@ -123,28 +124,32 @@ const Main = () => {
             <UlList>
               {data && (
                 <LiItem>
-                  Country/City: <SpanLiItem>{data.name}{` ( ${data.sys.country} )`}</SpanLiItem>
+                  {circle} Country/City:{" "}
+                  <SpanLiItem>
+                    {data.name}
+                    {` ( ${data.sys.country} )`}
+                  </SpanLiItem>
                 </LiItem>
               )}
               {data && (
                 <LiItem>
-                  Temp: <SpanLiItem>{convertTemp(data.main.temp)} C</SpanLiItem>
+                  {circle} Temp: <SpanLiItem>{convertTemp(data.main.temp)} C</SpanLiItem>
                 </LiItem>
               )}
               {data && (
                 <LiItem>
-                  Pressure:{" "}
+                  {circle} Pressure:{" "}
                   <SpanLiItem>{convertTemp(data.main.pressure)} PA</SpanLiItem>
                 </LiItem>
               )}
               {data && (
                 <LiItem>
-                  Humidity: <SpanLiItem>{data.main.humidity}%</SpanLiItem>
+                  {circle} Humidity: <SpanLiItem>{data.main.humidity}%</SpanLiItem>
                 </LiItem>
               )}
               {data && (
                 <LiItem>
-                  Weather:{" "}
+                  {circle} Weather:{" "}
                   <SpanLiItem>{data.weather[0].description}</SpanLiItem>
                 </LiItem>
               )}
@@ -152,7 +157,7 @@ const Main = () => {
           )
         )}
       </div>
-    </DivContainer>
+    </div>
   );
 };
 
